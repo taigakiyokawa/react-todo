@@ -14,7 +14,14 @@ export default class App extends React.Component {
   // Save data
   handleAdd(e) {
     console.log(e.target.title.value);
+    // Prevent redirect
     e.preventDefault();
+    // Add data to todo-array from Form
+    this.state.todo.push({ title: e.target.title.value }); // Doesn't save yet
+    // Update state
+    this.setState({ todo: this.state.todo });
+    // Reset value
+    e.target.title.value = "";
   }
 
   render() {
@@ -23,7 +30,7 @@ export default class App extends React.Component {
         <h1 className="siimple-box-title siimple--color-white">React Todo App</h1>
         <Form handleAdd={ this.handleAdd }/>
         <div className="siimple-rule"></div>
-        <List/>
+        <List todos={ this.state.todo }/>
       </div>
     );
   }
