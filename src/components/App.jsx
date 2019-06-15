@@ -9,9 +9,10 @@ export default class App extends React.Component {
       todo: []
     };
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
-  // Save data
+  // Save todo
   handleAdd(e) {
     console.log(e.target.title.value);
     // Prevent redirect
@@ -24,13 +25,20 @@ export default class App extends React.Component {
     e.target.title.value = "";
   }
 
+  // Remove todo
+  handleRemove(i) {
+    this.state.todo.splice(i, 1);
+    // Update state
+    this.setState({todo: this.state.todo});
+  }
+
   render() {
     return (
       <div className="siimple-box siimple--bg-dark">
         <h1 className="siimple-box-title siimple--color-white">React Todo App</h1>
         <Form handleAdd={ this.handleAdd }/>
         <div className="siimple-rule"></div>
-        <List todos={ this.state.todo }/>
+        <List todos={ this.state.todo } handleRemove={ this.handleRemove }/>
       </div>
     );
   }
